@@ -11,13 +11,13 @@ Write a function named screenForNames that takes in an array of strings and uses
 ------------------------------------------------------------------------------------------------ */
 
 const screenForNames = (arr) => {
-  let regex = /^(Mr|Mrs|Ms|Dr){1}(\. ){1}\w+[\w\s]*/
+  let regex = /^(Mr|Mrs|Ms|Dr){1}(\. ){1}\w+[\w\s]*/;
   return arr.filter((name) => {
     if (regex.test(name)) {
-      return name
+      return name;
     }
-  })
-}
+  });
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -31,11 +31,11 @@ const toTitleCase = (arr) => {
   // Solution code here...
   return arr.map((ele) => {
 
-    let newElement = ele.split('')
-    newElement[0] = newElement[0].toUpperCase()
-    return newElement.join('')
+    let newElement = ele.split('');
+    newElement[0] = newElement[0].toUpperCase();
+    return newElement.join('');
 
-  })
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -114,17 +114,17 @@ let biggerThanLuke = (arr) => {
   let newArr = [];
   arr.map(ele => {
     if (ele.mass > 77) {
-      newArr.push(ele.name)
+      newArr.push(ele.name);
     }
-  })
-  let names = ''
+  });
+  let names = '';
   newArr.map((ele, idx) => {
     if (idx === newArr.length - 1) {
-      names += ele
+      names += ele;
     }
-    else { names += `${ele} - ` }
+    else { names += `${ele} - `; }
 
-  })
+  });
 
   return names;
 };
@@ -145,13 +145,13 @@ This data could be sorted by name or price.
 
 const sortBy = (property, arr) => {
   return arr.sort((a, b) => {
-    return a[property] > b[property] ? 1 : -1
-  })
+    return a[property] > b[property] ? 1 : -1;
+  });
 };
 
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 5 
+CHALLENGE 5
 
 Write a function that determines if a given URL is secure, beginning with https://
 
@@ -164,9 +164,9 @@ https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
   // Solution code here...
-  let c = url.split(":");
-  if (c[0] === 'http' || c[1].charAt(1) !== "/") {
-    return false
+  let c = url.split(':');
+  if (c[0] === 'http' || c[1].charAt(1) !== '/') {
+    return false;
   } else {
     return true;
   }
@@ -174,7 +174,7 @@ const isSecure = (url) => {
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 6 
+CHALLENGE 6
 
 
 Write a function named detectTicTacToeWin that accepts a two-dimensional array of strings. Each string is guaranteed to be either "X", "O" or an empty string. Your function should check to see if any row, column, or either diagonal direction has three matching "X" or "O" symbols (non-empty strings), three-in-a-line.
@@ -194,9 +194,35 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
 
+  const newBoard = [];
+  board.forEach(element => {
+    element.forEach(value => {
+      newBoard.push(value);
+    });
+  });
+  for (let i = 0; i < 9; i + 3) {
+    if (newBoard[i] === newBoard[i + 1] && newBoard[i] === newBoard[i + 2] && newBoard[i] !== '') {
+      return true;
+    } else {
+      for (let i = 0; i < 3; i++) {
+        if (newBoard[i] === newBoard[i + 3] && newBoard[i] === newBoard[i + 6] && newBoard[i] !== '') {
+          return true;
+        } else {
+          for (let i = 0; i < 3; i + 2) {
+            if (newBoard[i] === newBoard[4] && newBoard[i] === newBoard[8 - i] && newBoard[i] !== '') {
+              return true;
+            }
+            else {
+              return false;
+            }
+          }
+        }
+      }
+    }
+  }
 };
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -270,7 +296,7 @@ describe('Testing challenge 5', () => {
   });
 });
 
-xdescribe('Testing challenge 6', () => {
+describe('Testing challenge 6', () => {
   test('It should return true if there are three in a row', () => {
     expect(detectTicTacToeWin([['X', '', 'O'], ['X', 'O', ''], ['X', 'O', 'X']])).toStrictEqual(true);
     expect(detectTicTacToeWin([['O', '', 'X'], ['X', 'O', 'X'], ['X', '', 'O']])).toStrictEqual(true);
